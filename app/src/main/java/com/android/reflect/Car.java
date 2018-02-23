@@ -9,6 +9,10 @@ public class Car {
     private String mBrand;
     private Color mColor;
 
+    public String mA;
+    protected String mB;
+    String mC;
+
     public enum Color {
         RED,
         WHITE,
@@ -17,8 +21,9 @@ public class Car {
         YELLOR
     }
 
-    public Car(String mBand) {
-        this.mBrand = mBand;
+    public Car(String brand, Color color) {
+        mBrand = brand;
+        mColor = color;
     }
 
 
