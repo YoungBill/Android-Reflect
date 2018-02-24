@@ -15,8 +15,8 @@ public class ReflectUtil {
      *
      * @param owner
      * @param methodName
-     * @param types
-     * @param values
+     * @param parameterTypes
+     * @param args
      * @return
      */
     public static Object invoke(Object owner, String methodName, Class<?>[] parameterTypes, Object[] args) {

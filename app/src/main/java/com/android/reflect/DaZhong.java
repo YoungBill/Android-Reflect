@@ -11,11 +11,19 @@ public class DaZhong extends Car {
     String mF;
     private String mG;
 
-    public DaZhong(){
+    public DaZhong() {
 
     }
-    public DaZhong(String brand, Color color) {
+
+    private DaZhong(String brand, Color color) {
         super(brand, color);
+    }
+
+    public DaZhong(String d, String e, String f, String g) {
+        mD = d;
+        mE = e;
+        mF = f;
+        mG = g;
     }
 
     private String testReflectMethod(String name, int age) {

@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,5 +58,23 @@ public class MainActivity extends AppCompatActivity {
         DaZhong daZhong = new DaZhong();
         String s = (String) ReflectUtil.invoke(daZhong, "testReflectMethod", new Class[]{String.class, int.class}, new Object[]{"YoungBill", 26});
         Log.d(TAG, s);
+
+
+        Class daZhongClass1 = DaZhong.class;
+
+        /**
+         * 因为，Constructor 不能从父类继承，所以就没有办法通过 getConstructor() 获取到父类的 Constructor。
+         */
+        Constructor[] constructors = daZhongClass1.getConstructors();
+        for (Constructor c : constructors) {
+            Log.d(TAG, "getConstructor:" + c.toString());
+        }
+
+        constructors = daZhongClass1.getDeclaredConstructors();
+        for (Constructor c : constructors) {
+            Log.d(TAG, "getDeclaredConstructors:" + c.toString());
+        }
+
+
     }
 }
