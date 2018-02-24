@@ -21,6 +21,10 @@ public class Car {
         YELLOR
     }
 
+    public Car() {
+
+    }
+
     public Car(String brand, Color color) {
         mBrand = brand;
         mColor = color;
