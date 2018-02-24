@@ -29,4 +29,9 @@ public class DaZhong extends Car {
     private String testReflectMethod(String name, int age) {
         return "testReflectMethod,name: " + name + " age: " + age;
     }
+
+    private static String testReflectStaticMethod(String name, int age) {
+        return "testReflectStaticMethod,name: " + name + " age: " + age;
+    }
+
 }

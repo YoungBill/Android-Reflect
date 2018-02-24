@@ -40,5 +40,4 @@ public class Car {
         return "Car [mBrand=" + mBrand + ", mColor=" + mColor + "]";
     }
 
-
 }

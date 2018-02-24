@@ -54,11 +54,18 @@ public class MainActivity extends AppCompatActivity {
 
         /**
          * 反射某个方法
+         * invoke() 方法中第一个参数 Object 实质上是 Method 所依附的 Class 对应的类的实例，后面的可变参数 Object 对应的自然就是参数。
          */
         DaZhong daZhong = new DaZhong();
         String s = (String) ReflectUtil.invoke(daZhong, "testReflectMethod", new Class[]{String.class, int.class}, new Object[]{"YoungBill", 26});
         Log.d(TAG, s);
 
+        /**
+         * 反射某个静态方法
+         * 如果这个方法是一个静态方法，那么 ojb 为 null
+         */
+        s = (String) ReflectUtil.invokeStatic(DaZhong.class, "testReflectStaticMethod", new Class[]{String.class, int.class}, new Object[]{"YoungBill", 26});
+        Log.d(TAG, s);
 
         Class daZhongClass1 = DaZhong.class;
 

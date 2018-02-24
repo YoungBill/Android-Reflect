@@ -10,6 +10,36 @@ import java.lang.reflect.Method;
  */
 public class ReflectUtil {
 
+
+    private static final String TAG = "ReflectUtil";
+
+    /**
+     * 执行某静态方法，如果此类中没找到则从父类中找
+     *
+     * @param c
+     * @param methodName
+     * @param parameterTypes
+     * @param args
+     * @return
+     */
+    public static Object invokeStatic(Class c, String methodName, Class<?>[] parameterTypes, Object[] args) {
+        if (c == null)
+            return null;
+        while (c != null) {
+            try {
+                Method m = c.getDeclaredMethod(methodName, parameterTypes);
+                m.setAccessible(true);
+                return m.invoke(null, args);
+            } catch (NoSuchMethodException e) {
+                c = c.getSuperclass();
+            } catch (Exception e) {
+                Log.e(TAG, "invoke-->methodName=" + methodName, e);
+                break;
+            }
+        }
+        return null;
+    }
+
     /**
      * 执行某方法，如果此类中没找到则从父类中找
      *
@@ -31,7 +61,7 @@ public class ReflectUtil {
             } catch (NoSuchMethodException e) {
                 c = c.getSuperclass();
             } catch (Exception e) {
-                Log.e("app2", "invoke-->methodName=" + methodName, e);
+                Log.e(TAG, "invoke-->methodName=" + methodName, e);
                 break;
             }
         }
