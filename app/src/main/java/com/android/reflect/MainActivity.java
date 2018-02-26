@@ -6,9 +6,9 @@ import android.util.Log;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 
 public class MainActivity extends AppCompatActivity {
-
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -82,6 +82,27 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "getDeclaredConstructors:" + c.toString());
         }
 
+        /**
+         * 构造函数
+         * 在 Java 反射机制中有两种方法可以用来创建类的对象实例：Class.newInstance() 和 Constructor.newInstance()。
+         * 官方文档建议开发者使用后面这种方法，下面是原因:
+         * Class.newInstance() 只能调用无参的构造方法，而 Constructor.newInstance() 则可以调用任意的构造方法。
+         * Class.newInstance() 通过构造方法直接抛出异常，而 Constructor.newInstance() 会把抛出来的异常包装到 InvocationTargetException 里面去，这个和 Method 行为一致。
+         * Class.newInstance() 要求构造方法能够被访问，而 Constructor.newInstance() 却能够访问 private 修饰的构造器。
+         */
+        try {
+            DaZhong daZhong1 = DaZhong.class.newInstance();
+            Log.d(TAG, daZhong1.toString());
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
+        try {
+            Constructor daZhongConstructor = DaZhong.class.getConstructor(String.class, String.class, String.class, String.class);
+            DaZhong daZhong1 = (DaZhong) daZhongConstructor.newInstance("d", "e", "f", "g");
+            Log.d(TAG, daZhong1.toString());
+        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 }

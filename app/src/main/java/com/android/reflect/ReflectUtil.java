@@ -6,12 +6,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
- * java利用反射的一些实用的方法
+ * Created by baina on 18-2-26.
+ * java反射工具类
  */
+
 public class ReflectUtil {
 
-
-    private static final String TAG = "ReflectUtil";
+    private static final String TAG = "ReflectUtil1";
 
     /**
      * 执行某静态方法，如果此类中没找到则从父类中找
@@ -25,17 +26,14 @@ public class ReflectUtil {
     public static Object invokeStatic(Class c, String methodName, Class<?>[] parameterTypes, Object[] args) {
         if (c == null)
             return null;
-        while (c != null) {
-            try {
-                Method m = c.getDeclaredMethod(methodName, parameterTypes);
-                m.setAccessible(true);
-                return m.invoke(null, args);
-            } catch (NoSuchMethodException e) {
-                c = c.getSuperclass();
-            } catch (Exception e) {
-                Log.e(TAG, "invoke-->methodName=" + methodName, e);
-                break;
-            }
+        try {
+            Method m = c.getDeclaredMethod(methodName, parameterTypes);
+            m.setAccessible(true);
+            return m.invoke(null, args);
+        } catch (NoSuchMethodException e) {
+            c = c.getSuperclass();
+        } catch (Exception e) {
+            Log.e(TAG, "invoke-->methodName=" + methodName, e);
         }
         return null;
     }
@@ -138,5 +136,4 @@ public class ReflectUtil {
         }
         return null;
     }
-
 }

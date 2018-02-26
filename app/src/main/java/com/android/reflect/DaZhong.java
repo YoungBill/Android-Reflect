@@ -1,10 +1,14 @@
 package com.android.reflect;
 
+import android.util.Log;
+
 /**
  * Created by chentao on 2018/2/23.
  */
 
 public class DaZhong extends Car {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     public String mD;
     protected String mE;
@@ -12,7 +16,7 @@ public class DaZhong extends Car {
     private String mG;
 
     public DaZhong() {
-
+        Log.d(TAG, "我是无参构造函数");
     }
 
     private DaZhong(String brand, Color color) {
@@ -24,6 +28,12 @@ public class DaZhong extends Car {
         mE = e;
         mF = f;
         mG = g;
+        Log.d(TAG, "我是有参构造函数");
+    }
+
+    @Override
+    public String toString() {
+        return "DaZhong [mD=" + mD + "]";
     }
 
     private String testReflectMethod(String name, int age) {
