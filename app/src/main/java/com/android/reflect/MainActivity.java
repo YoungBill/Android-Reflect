@@ -104,5 +104,26 @@ public class MainActivity extends AppCompatActivity {
         } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
         }
+
+        /**
+         * 消耗对比
+         */
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Car car = new Car();
+                long directStartTime = System.currentTimeMillis();
+                for (int i = 0; i < 20000; i++) {
+                    car.drive();
+                }
+                long directEndTime = System.currentTimeMillis();
+                long reflectStartTime = System.currentTimeMillis();
+                for (int i = 0; i < 20000; i++) {
+                    ReflectUtil.invoke(car, "drive", null, null);
+                }
+                long reflectEndTime = System.currentTimeMillis();
+                Log.d(TAG, "直接调用消耗时间: " + (directEndTime - directStartTime) + ", 反射调用消耗时间: " + (reflectEndTime - reflectStartTime));
+            }
+        }).start();
     }
 }

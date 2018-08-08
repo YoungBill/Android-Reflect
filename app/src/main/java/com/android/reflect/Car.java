@@ -1,10 +1,14 @@
 package com.android.reflect;
 
+import android.util.Log;
+
 /**
  * Created by chentao on 2018/2/23.
  */
 
 public class Car {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private String mBrand;
     private Color mColor;
@@ -32,8 +36,13 @@ public class Car {
 
 
     public void drive() {
-        System.out.println("di di di,开车了！");
+        Log.d(TAG, "di di di,开车了！");
     }
+
+    public void drive(String s) {
+        Log.d(TAG, "di di di,开车了！" + s);
+    }
+
 
     @Override
     public String toString() {
